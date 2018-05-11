@@ -1,6 +1,8 @@
 package com.example.controller.sales;
 
+import com.example.pojo.gongyong.TPotentialClientMasterFileAddress;
 import com.example.pojo.procurement.Client_masterfile;
+import com.example.pojo.procurement.Client_masterfile_address;
 import com.example.pojo.sales.SSellQuote;
 import com.example.service.sales.SalesQuotationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,56 @@ public class SalesQuotationController {
     }
 
     /**
+     * 按正式客户编号查询客户地址
+     * @param addressid
+     * @return
+     */
+    @RequestMapping("/queryClientMasterfileAddress")
+    public Map<String,Object> queryClientMasterfileAddress(String addressid){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("queryClientMasterfileAddressData",salesQuotationService.queryClientMasterfileAddress(addressid));
+        return map;
+    }
+
+    /**
+     * 查询潜在客户
+     */
+    @RequestMapping("/queryPotentialClientFile")
+    public Map<String,Object> queryPotentialClientFile(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("queryPotentialClientFileData",salesQuotationService.queryPotentialClientFile());
+        return map;
+    }
+
+    /**
+     * 按潜在客户编号查询客户地址
+     * @param addressid
+     * @return
+     */
+    @RequestMapping("/queryPotentialClientFileAddress")
+    public Map<String,Object> queryPotentialClientFileAddress(String addressid){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("queryPotentialClientFileAddressData",salesQuotationService.queryPotentialClientFileAddress(addressid));
+        return map;
+    }
+
+    /**
      * 查询当前系统时间
      * @return
      */
-    @RequestMapping("/queryDate")
-    public String queryDate(){
-        Date date=new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        String dateStr = sdf.format(date);
-        return dateStr;
+    @RequestMapping("/queryMaxNoByDate")
+    public String queryDate(String dateStr){
+        return "";
+    }
+
+    /**
+     * 按日期查询做大订单号
+     * @param dateStr
+     * @return
+     */
+    @RequestMapping("/queryMaxQuId")
+    public String queryMaxQuId(String dateStr){
+        return salesQuotationService.queryMaxQuId(dateStr);
     }
 
     /**

@@ -1,7 +1,10 @@
 package com.example.service.sales;
 
 import com.example.mapper.sales.SalesQuotationMapper;
+import com.example.pojo.gongyong.TPotentialClientMasterFile;
+import com.example.pojo.gongyong.TPotentialClientMasterFileAddress;
 import com.example.pojo.procurement.Client_masterfile;
+import com.example.pojo.procurement.Client_masterfile_address;
 import com.example.pojo.sales.SSellQuote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,43 @@ public class SalesQuotationService {
         return salesQuotationMapper.queryClientMasterfile();
     }
 
+    /**
+     * 按正式客户编号查询客户地址
+     * @param addressid
+     * @return
+     */
+    public List<Client_masterfile_address> queryClientMasterfileAddress(String addressid){
+        return salesQuotationMapper.queryClientMasterfileAddress(addressid);
+    }
+
+    /**
+     * 查询潜在客户
+     */
+    public List<TPotentialClientMasterFile> queryPotentialClientFile(){
+        return salesQuotationMapper.queryPotentialClientFile();
+    }
+
+    /**
+     * 按潜在客户编号查询客户地址
+     * @param addressid
+     * @return
+     */
+    public List<TPotentialClientMasterFileAddress> queryPotentialClientFileAddress(String addressid){
+        return salesQuotationMapper.queryPotentialClientFileAddress(addressid);
+    }
+
+    /**
+     * 按日期查询做大订单号
+     * @param dateStr
+     * @return
+     */
+    public String queryMaxQuId(String dateStr){
+        String quId=salesQuotationMapper.queryMaxQuId(dateStr);
+        if(quId!=null){
+            return Integer.parseInt(quId)+1+"";
+        }
+        return dateStr.replace("-","")+"01";
+    }
     /**
      * 主从新增销售报价单
      * @param sSellQuote

@@ -1,6 +1,9 @@
 package com.example.mapper.sales;
 
+import com.example.pojo.gongyong.TPotentialClientMasterFile;
+import com.example.pojo.gongyong.TPotentialClientMasterFileAddress;
 import com.example.pojo.procurement.Client_masterfile;
+import com.example.pojo.procurement.Client_masterfile_address;
 import com.example.pojo.sales.SSellQuote;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,6 +22,31 @@ public interface SalesQuotationMapper {
      */
     public List<Client_masterfile> queryClientMasterfile();
 
+    /**
+     * 按正式客户编号查询客户地址
+     * @param addressid
+     * @return
+     */
+    public List<Client_masterfile_address> queryClientMasterfileAddress(@Param("addressid") String addressid);
+
+    /**
+     * 查询潜在客户
+     * @return
+     */
+    public List<TPotentialClientMasterFile> queryPotentialClientFile();
+
+    /**
+     * 按潜在客户编号查询客户地址
+     * @param addressid
+     * @return
+     */
+    public List<TPotentialClientMasterFileAddress> queryPotentialClientFileAddress(@Param("addressid") String addressid);
+
+    /**
+     * 按日期查询做大订单号     * @param dateStr
+     * @return
+     */
+    public String queryMaxQuId(@Param("dateStr") String dateStr);
 
     /**
      * 主从新增销售报价单

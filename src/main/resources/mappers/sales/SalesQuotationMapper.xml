@@ -8,6 +8,26 @@
     SELECT ID,ShortName FROM `t_client_masterfile`;
   </select>
 
+  <!-- 查询正式客户地址 -->
+  <select id="queryClientMasterfileAddress" resultType="com.example.pojo.procurement.Client_masterfile_address">
+    SELECT AddrID,Address FROM `t_client_masterfile_address` WHERE AddressID=#{addressid};
+  </select>
+
+  <!-- 查询潜在客户 -->
+  <select id="queryPotentialClientFile" resultType="com.example.pojo.procurement.Client_masterfile">
+    SELECT ID,ShortName FROM `t_potential_client_master_file`;
+  </select>
+
+  <!-- 查询潜在客户地址 -->
+  <select id="queryPotentialClientFileAddress" resultType="com.example.pojo.gongyong.TPotentialClientMasterFileAddress">
+    SELECT AddrID,Address FROM `t_potential_client_master_file_address` WHERE AddressID=#{addressid};
+  </select>
+
+  <!--按日期查询做大订单号-->
+  <select id="queryMaxQuId" resultType="String">
+    SELECT MAX(`qu_id`) FROM `s_sell_ quote` WHERE `qu_date`=#{dateStr};
+  </select>
+
   <!--主从新增销售报价单-->
     <insert id="saveSalesQuotation">
         INSERT INTO `navigator`.`s_sell_ quote` (

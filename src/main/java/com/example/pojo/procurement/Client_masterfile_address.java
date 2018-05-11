@@ -15,6 +15,8 @@ public class Client_masterfile_address {
 	FaxNo VARCHAR(20),			'传真号码'
 	WalkAddr VARCHAR(20),			'行走路线'
 	Memo VARCHAR(20)			'备注'
+	addressid;                  地址关联
+	client_masterfile           客户主文件对象
      */
     private int AddrID;
     private String Address;
@@ -25,6 +27,24 @@ public class Client_masterfile_address {
     private String FaxNo;
     private String WalkAddr;
     private String Memo;
+    private String addressid;
+    private Client_masterfile client_masterfile;
+
+    public String getAddressid() {
+        return addressid;
+    }
+
+    public void setAddressid(String addressid) {
+        this.addressid = addressid;
+    }
+
+    public Client_masterfile getClient_masterfile() {
+        return client_masterfile;
+    }
+
+    public void setClient_masterfile(Client_masterfile client_masterfile) {
+        this.client_masterfile = client_masterfile;
+    }
 
     public int getAddrID() {
         return AddrID;

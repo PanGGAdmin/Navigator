@@ -17,9 +17,11 @@
         <div class="layui-row layui-col-space20">
             <div class="layui-col-md6 layui-col-xs6">
                 <div class="layui-form-item">
-                    <div class="layui-col-md4  layui-col-xs5"><input type="checkbox" name="like[read]" title="正式客户" checked></div>
+                    <div class="layui-col-md4  layui-col-xs5">
+                        <input type="checkbox" id="tpcheckUser" title="正式客户" lay-filter="checkUser" checked>
+                    </div>
                     <div class="layui-col-md8  layui-col-xs7">
-                        <select id="modules" name="modules" lay-verify="required" lay-search="">
+                        <select id="tpmodules" name="modules" lay-verify="required" lay-search="" lay-filter="modules">
                             <option value="">直接选择或搜索选择</option>
                         </select>
                     </div>
@@ -28,8 +30,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">送货地址</label>
                     <div class="layui-input-block">
-                        <div class="layui-col-md4 layui-col-xs4"><input type="text" name="addressId" required lay-verify="required" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-col-md8  layui-col-xs8"><input type="text" name="addressName" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-col-md4 layui-col-xs4"><input type="text" id="tpaddressId" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-col-md8  layui-col-xs8"><input type="text" id="tpaddressName" required lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                 </div>
 
@@ -65,7 +67,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">单据号码</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" id="tpQuId" required lay-verify="required" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
 
@@ -233,47 +235,49 @@
 <script src="../layui/layui.all.js"></script>
 <script src="../js/gonggong.js"></script>
 <script>
-
-
-    $(function(){
-        /*$.ajax({
-            url:"/queryClientMasterfile",
-            type:"GET",
-            data:{},
-            dataType: "json",
-            success: function(data){
-                $("#date1").val(data);
-            },
-            error:function (xhr) {
-                layer.msg('服务器连接失败');
-            }
-        });*/
-    })
     layui.use(['form', 'layedit', 'laydate', 'table'], function() {
         var table = layui.table;
         var form = layui.form,
             laydate = layui.laydate;
 
+        //单据日期监听
         laydate.render({
             elem: '#date1',
-            value:new Date()
+            value:new Date(),
+            change: function(value, date, endDate){
+                $.ajax({
+                    url:"/queryMaxQuId",
+                    type:"GET",
+                    data:{"dateStr":value},
+                    dataType: "json",
+                    success: function(data){
+                        $("#tpQuId").val(data);
+                    },
+                    error:function (xhr) {
+                        layer.msg('服务器连接失败');
+                    }
+                });
+            },
+            done: function(value, date, endDate){
+                $.ajax({
+                    url:"/queryMaxQuId",
+                    type:"GET",
+                    data:{"dateStr":value},
+                    dataType: "json",
+                    success: function(data){
+                        $("#tpQuId").val(data);
+                    },
+                    error:function (xhr) {
+                        layer.msg('服务器连接失败');
+                    }
+                });
+            }
         });
 
         //日期
         laydate.render({
             elem: '#date',
             value:new Date()
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function(data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
         });
 
         //监听单元格编辑
@@ -285,8 +289,9 @@
                 field = obj.field; //得到字段
             layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
         });
-        form.render();
 
+        form.render();
+        //加载页面查询正式客户
         $.ajax({
             url:"/queryClientMasterfile",
             type:"GET",
@@ -299,16 +304,126 @@
                      option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
 
                 })
-                $("#modules").html(option);
+                $("#tpmodules").html(option);
                 form.render();
             },
             error:function (xhr) {
                 layer.msg('服务器连接失败');
             }
+        });
+        var datachecked=true;
+        //正式客户复选框监听
+        form.on('checkbox(checkUser)', function(data){
+            datachecked=data.elem.checked;
+            //勾选，查询正式客户
+            if(data.elem.checked){
+                $.ajax({
+                    url:"/queryClientMasterfile",
+                    type:"GET",
+                    data:{},
+                    dataType: "json",
+                    success: function(data){
+                        var option='<option value="">直接选择或搜索选择</option>';
+                        jQuery("#modules").html("");
+                        $.each(data.queryClientMasterfileData,function(i,obj){
+                            option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
+
+                        })
+                        $("#tpmodules").html(option);
+                        form.render();
+                        $("#tpaddressId").val('');
+                        $("#tpaddressName").val('');
+                    },
+                    error:function (xhr) {
+                        layer.msg('服务器连接失败');
+                    }
+                });
+            }else {
+                //不勾选，查询潜在客户
+                $.ajax({
+                    url:"/queryPotentialClientFile",
+                    type:"GET",
+                    data:{},
+                    dataType: "json",
+                    success: function(data){
+                        var option='<option value="">直接选择或搜索选择</option>';
+                        jQuery("#modules").html("");
+                        $.each(data.queryPotentialClientFileData,function(i,obj){
+                            option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
+
+                        })
+                        $("#tpmodules").html(option);
+                        form.render();
+                        $("#tpaddressId").val('');
+                        $("#tpaddressName").val('');
+                    },
+                    error:function (xhr) {
+                        layer.msg('服务器连接失败');
+                    }
+                });
+            }
 
         });
 
+        //客户下拉框监听事件
+        form.on('select(modules)', function(data){
+            if(data.value!="") {
+                if(datachecked){
+                    $.ajax({
+                        url:"/queryClientMasterfileAddress",
+                        type:"GET",
+                        data:{addressid:data.value},
+                        dataType: "json",
+                        success: function(data){
+                            console.info(data);
+                            $("#tpaddressId").val(data.queryClientMasterfileAddressData[0].addrID);
+                            $("#tpaddressName").val(data.queryClientMasterfileAddressData[0].address);
+                        },
+                        error:function (xhr) {
+                            layer.msg('服务器连接失败');
+                        }
+                    });
+                }else{
+                    $.ajax({
+                        url:"/queryPotentialClientFileAddress",
+                        type:"GET",
+                        data:{addressid:data.value},
+                        dataType: "json",
+                        success: function(data){
+                            console.info(data);
+                            $("#tpaddressId").val(data.queryPotentialClientFileAddressData[0].addrid);
+                            $("#tpaddressName").val(data.queryPotentialClientFileAddressData[0].address);
+                        },
+                        error:function (xhr) {
+                            layer.msg('服务器连接失败');
+                        }
+                    });
+                }
+            }else{
+                $("#tpaddressId").val('');
+                $("#tpaddressName").val('');
+            }
+        });
     });
+    $(function(){
+        var endtime=new Date();
+        var dateYear = endtime.getFullYear();
+        var dateMonth=(endtime.getMonth()+1)<10?"0"+(endtime.getMonth()+1) :(endtime.getMonth()+1);
+        var dateDay=endtime.getDate()<10?"0"+endtime.getDate() :endtime.getDate();
+        var dateStr=dateYear+"-"+dateMonth+"-"+dateDay;
+        $.ajax({
+            url:"/queryMaxQuId",
+            type:"GET",
+            data:{"dateStr":dateStr},
+            dataType: "json",
+            success: function(data){
+                $("#tpQuId").val(data);
+            },
+            error:function (xhr) {
+                layer.msg('服务器连接失败');
+            }
+        });
+    })
 </script>
 
 </html>
