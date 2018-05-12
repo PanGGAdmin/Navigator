@@ -1,0 +1,38 @@
+<!-- 应收冲款 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="../images/20.png" onclick="ajax1('应收冲款','account/AdvancePayment.html','ysck')" alt="" srcset="">
+    <img src="../images/20.png" onclick="ajax1('应收冲款1','account/AdvancePayment.html','ysck1')" alt="" srcset="">
+</body>
+
+<script src="../jquery/jquery-3.3.1.min.js"></script>
+<script src="../layui/layui.all.js"></script>
+<script src="../js/gonggong.js"></script>
+<script>
+    var ajax2 = function(title, url, id) {
+        // $.post('account/AccountsReceivable.html', {}, function(str) {
+        //     layuimodel("caig", str, "caig")
+        // });
+        $.ajax({
+            type: "GET",
+            data: {},
+            url: url,
+            success: function(r) {
+
+                layuimodel(title, r, id);
+            }
+
+        })
+    }
+</script>
+
+</html>

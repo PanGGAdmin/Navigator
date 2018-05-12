@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 盘点单MapperXml-->
+<mapper namespace="com.example.mapper.inventory.InventoryMapper">
+
+
+    <select id="selectcl" resultType="com.example.pojo.account.yxppojo.checklist">
+        select 	clId,
+        cldate,
+        warehouseId,
+        pandianuserId,
+        departmentId,
+        zhidanuserId,
+        fuheuserId
+
+        from
+        navigator.checklist
+        group by cldate desc
+        limit #{currpage}, 1;
+    </select>
+    <select id="selectcd" resultType="com.example.pojo.account.yxppojo.checkdetailed">
+       select 	clId,
+        columnId,
+        materielId,
+        zhangmianCount,
+        pandianCount,
+        price,
+        yingkuiPrice,
+        cause
+
+        from
+        navigator.checkdetailed
+        where clId = #{clid}
+    </select>
+
+    <update id="updatecd" parameterType="com.example.pojo.account.yxppojo.checkdetailed">
+
+  update navigator.checkdetailed
+	set
+	materielId = #{materielId} ,
+	zhangmianCount = #{zhangmianCount} ,
+	pandianCount = #{pandianCount} ,
+	price = #{price} ,
+	yingkuiPrice = #{yingkuiPrice} ,
+	cause = #{cause}
+
+	where
+	clId = 'clId' and columnId = #{columnId} ;
+
+    </update>
+
+
+</mapper>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/gongong.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo"><img src="images/folder.png" alt="" onclick="toggle()"></div>
+            <div class="caidan">
+                <div id="startmenu">
+                    <ul id="programs">
+                        <li>
+                            <a href="#" onclick="ajax1('共用资料','html/gongyong/gongyong.html','gyzl')"><img src="images/20.png" alt="" /><label>共用资料</label></a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="ajax1('采购管理','html/gongyong/caigouguanli.html','cggl')"><img src="images/20.png" alt="" /><label>采购管理</label></a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="ajax1('库存管理','html/gongyong/kucunguanli.html','ckgl')"><img src="images/16.png" alt="" /><label>库存管理</label></a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="ajax1('销售管理','html/gongyong/xiaoshouguanli.html','xsgl')"><img src="images/27.png" alt="" /><label>销售管理</label></a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="ajax1('账款管理','html/gongyong/zhangkuanguanli.html','zkgl')"><img src="images/15.png" alt="" /><label>账款管理</label></a>
+                        </li>
+
+                    </ul>
+
+                    <ul id="links">
+                        <li class="icon"><img src="images/folder.png" alt="" /></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="tubiao">
+                <div>
+                    <img src="images/20.png" alt="" onclick="ajax1('共用资料','html/gongyong/gongyong.html','gyzl')">
+                    <div>共用资料</div>
+                </div>
+                <div>
+                    <img src="images/20.png" alt="" onclick="ajax1('采购管理','html/gongyong/caigouguanli.html','cggl')">
+                    <div>采购管理</div>
+                </div>
+                <div>
+                    <img src="images/16.png" alt="" onclick="ajax1('库存管理','html/gongyong/kucunguanli.html','ckgl')">
+                    <div>库存管理</div>
+                </div>
+                <div>
+                    <img src="images/27.png" alt="" onclick="ajax1('销售管理','html/gongyong/xiaoshouguanli.html','xsgl')">
+                    <div>销售管理</div>
+                </div>
+                <div>
+                    <img src="images/15.png" alt="" onclick="ajax1('账款管理','html/gongyong/zhangkuanguanli.html','zkgl')">
+                    <div>账款管理</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="layui/layui.all.js"></script>
+<script src="js/gonggong.js"></script>
+<script src="jquery/jquery-3.3.1.min.js"></script>
+
+<script>
+    // ajax方法,弹出层
+    var ajax1 = function(title, url, id) {
+        $.ajax({
+            type: "GET",
+            data: {},
+            url: url,
+            success: function(r) {
+
+                layuimodel(title, r, id);
+            }
+        })
+    }
+
+    var ajax2 = function(title, url, id) {
+        $.ajax({
+            type: "GET",
+            data: {},
+            url: url,
+            success: function(r) {
+
+                layuimodel2(title, r, id);
+            }
+        })
+    }
+</script>

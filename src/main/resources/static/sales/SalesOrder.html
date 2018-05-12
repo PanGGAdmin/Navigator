@@ -1,0 +1,354 @@
+<!-- 销售订购单 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/gongong.css">
+    <link rel="stylesheet" href="../css/tp/tp.css">
+</head>
+
+<body class="layui-fluid">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-row layui-col-space20">
+            <div class="layui-col-md6 layui-col-xs6">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="supplier" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">送货地址</label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md4  layui-col-xs5"><input type="text" name="addressId" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-col-md8  layui-col-xs7"><input type="text" name="addressName" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">销售订单类型</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单价是否含税</label>
+                    <div class="layui-input-block">
+                        <select name="" lay-verify="required">
+                            <option value="0">未税</option>
+                            <option value="1">含税</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单况</label>
+                    <div class="layui-input-block">
+                        <select name="" lay-verify="required">
+                                <option value="0">未结案</option>
+                                <option value="1">已结案</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6  layui-col-xs6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单据日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="documentsDate" id="documentsDate" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单据号码</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户订单</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">币别</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">汇率</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-card">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">内容</li>
+                    <li>账款</li>
+                    <li>备注</li>
+                </ul>
+                <div class="layui-tab-content" style="height: 250px;overflow:auto;">
+                    <div class="layui-tab-item layui-show">
+                        <table class="layui-table" lay-even style="width:3000px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:100px;">(栏号)</th>
+                                    <th>物料编号</th>
+                                    <th>(物料名称)</th>
+                                    <th>(规格型号)</th>
+                                    <th>(单位名称)</th>
+                                    <th>数量</th>
+                                    <th>折扣前单价</th>
+                                    <th>折数(%)</th>
+                                    <th>单价</th>
+                                    <th>金额</th>
+                                    <th>税率(%)</th>
+                                    <th>税额</th>
+                                    <th>(含税金额)</th>
+                                    <th>(预出库日)</th>
+                                    <th>未出数量</th>
+                                    <th>赠品</th>
+                                    <th>分录备注</th>
+                                    <th>物料组合</th>
+                                    <th>(来源单别)</th>
+                                    <th>(来源单号)</th>
+                                    <th>(生产)</th>
+                                    <th>(排程单号)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td>人生就像是一场修行</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>合计</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-row layui-col-space20">
+                            <div class="layui-col-md6  layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">账款归属</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" required lay-verify="required" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">付款条件</label>
+                                    <div class="layui-input-block">
+                                        <div class="layui-col-md4  layui-col-xs6"><select name="" lay-verify="required">
+                                                <option value="0">货到</option>
+                                                <option value="1">次月</option>
+                                                <option value="2">月结</option>
+                                                <option value="3">其他</option>
+                                            </select></div>
+                                        <div class="layui-col-md8  layui-col-xs6"><input type="text" name="" placeholder="请输入天数" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="layui-col-md6 layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">付款日期</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="payment" required lay-verify="required" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">账款月份</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="accountsDate" required lay-verify="required" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-row layui-col-space20">
+                            <div class="layui-col-md6  layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">表头条纹</label>
+                                    <div class="layui-input-block">
+                                        <div><select name="" lay-verify="required"></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">表尾条纹</label>
+                                    <div class="layui-input-block">
+                                        <div><select name="" lay-verify="required"></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-xs6">
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">自定义栏一</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-xs6">
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">自定义栏二</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row layui-col-space20">
+            <div class="layui-col-md6 layui-col-xs6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">业务人员</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属部门</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属项目</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6  layui-col-xs6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">制单人员</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" disabled required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">复核人员</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" disabled required lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <div class="layui-col-md2 layui-col-xs3">
+                <ul class="layui-nav layui-nav-tree" style="width:130px;" lay-filter="test">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">查询</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">历史交易查询</a></dd>
+                            <dd><a href="javascript:;">转单记录查询</a></dd>
+                            <dd><a href="javascript:;">利润预估查询</a></dd>
+                            <dd><a href="javascript:;">订单查询</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-col-md2  layui-col-xs3">
+                <ul class="layui-nav layui-nav-tree" style="width:130px;" lay-filter="test">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">转单</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">销售转出库单</a></dd>
+                            <dd><a href="javascript:;">销售报价转入</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-col-md2 layui-col-xs3">
+                <ul class="layui-nav layui-nav-tree" style="width:130px;" lay-filter="test">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">功能</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">批次变更价格</a></dd>
+                            <dd><a href="javascript:;">物料组合设定</a></dd>
+                            <dd><a href="javascript:;">单况状态切换</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <!-- js -->
+    <script src="../layui/layui.all.js"></script>
+    <script>
+        var laydate = layui.laydate;
+        //单据日期
+        laydate.render({
+            elem: '[name=documentsDate]' //指定元素
+        });
+        //付款日期
+        laydate.render({
+            elem: '[name=payment]' //指定元素
+        });
+        //账款月份
+        laydate.render({
+            elem: '[name=accountsDate]', //指定元素
+            type: 'month'
+        });
+    </script>
+</body>
+
+</html>

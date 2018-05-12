@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 调拨单MapperXml-->
+<mapper namespace="com.example.mapper.inventory.PricingMapper">
+<!--<select id="" resultType=""></select>-->
+    <!-- 新增调拨单主表-->
+    <insert id="insertdropout" >
+    insert into navigator.dropout
+	(Id,
+	DiaoChuCangku,
+	DiaoRuCangKu,
+	DanJvRiQi,
+	DanJvHaoMan,
+	ZhiDanRenYuan,
+	FuHeRenYuan
+	)
+	values
+	(
+	#{DiaoChuCangku},
+	#{DiaoRuCangKu},
+	#{DanJvRiQi},
+	#{DanJvHaoMan},
+	#{ZhiDanRenYuan},
+	#{FuHeRenYuan},
+	);
+    </insert>
+	<!-- 新增调拨单从表-->
+	<insert id="insertdropouts">
+	insert into navigator.dropouts
+	(Id,
+	Did,
+	Bid,
+	ShuLiang,
+	BeiZhu
+	)
+	values
+	(
+	#{Did},
+	#{Bid},
+	#{ShuLiang},
+	#{BeiZhu},
+	);
+	</insert>
+
+	<!--查询分页主表-->
+	<select id="selectbyone" resultType="com.example.pojo.pricing.DropOut">
+	select * from dropout
+	LIMIT #{begin},1
+	</select>
+	<!--查询分页从表-->
+	<select id="selectdropouts" resultType="com.example.pojo.pricing.DropOuts">
+		select * from dropouts d
+		inner join master m  on d.bid=m.Id
+        where d.Did=#{id}
+	</select>
+	<!--查询最大条数-->
+	<select id="count" resultType="int">
+	select count(*)
+	from dropout
+	</select>
+	<!--删除主表-->
+	<delete id="deletedropout" >
+	delete from navigator.dropout
+	where
+	Id = #{Id} ;
+	</delete>
+	<!--删除从表-->
+	<delete id="deletedropouts">
+	delete from navigator.dropouts
+	where
+	Id = #{Id} ;
+	</delete>
+	<!--修改主表-->
+	<update id="updatedropout">
+update navigator.dropout
+	set
+	DiaoChuCangku = #{DiaoChuCangku},
+	DiaoRuCangKu = #{DiaoRuCangKu},
+	DanJvRiQi = #{DanJvRiQi},
+	DanJvHaoMan = #{DanJvHaoMan},
+	ZhiDanRenYuan = #{ZhiDanRenYuan} ,
+	FuHeRenYuan = #{FuHeRenYuan}
+	where
+	Id = #{Id};
+	</update>
+	<!--修改从表-->
+	<update id="updatedropouts">
+	update navigator.dropouts
+	set
+	Did = {Did},
+	Bid = #{Bid} ,
+	ShuLiang = #{ShuLiang} ,
+	BeiZhu = #{BeiZhu}
+	where
+	Id = #{Id} ;
+	</update>
+</mapper>

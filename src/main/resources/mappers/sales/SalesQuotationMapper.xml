@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 销售报价MapperXml-->
+<mapper namespace="com.example.mapper.sales.SalesQuotationMapper">
+
+  <!-- 查询正式客户 -->
+  <select id="queryClientMasterfile" resultType="com.example.pojo.procurement.Client_masterfile">
+    SELECT ID,ShortName FROM `t_client_masterfile`;
+  </select>
+
+  <!--主从新增销售报价单-->
+    <insert id="saveSalesQuotation">
+        INSERT INTO `navigator`.`s_sell_ quote` (
+          `qu_id`,            <!--1、单据号码-->
+          `qu_cid`,           <!--2、客户编号id-->
+          `qu_cname`,         <!--3、客户名称-->
+          `qu_caddress`,      <!--4、送货地址（客户表中带出）-->
+          `qu_date`,          <!--5、单据日期-->
+          `qu_effectdate`,    <!--6、有效日期-->
+          `qu_pricetax`,      <!--7、单价是否含税 (1代表是0代表否)-->
+          `qu_moneytype`,     <!--8、币别-->
+          `qu_ exchangerate`, <!--9、汇率-->
+          `qu_peoyw_id`,      <!--10、业务人员id-->
+          `qu_peoyw_name`,    <!--11、业务人员名称-->
+          `qu_emp_id`,        <!--12、所属部门id-->
+          `qu_emp_name`,      <!--13、所属部门名称-->
+          `qu_perzd_id`,      <!--14、制单人员id-->
+          `qu_perzd_name`,    <!--15、制单人员名称-->
+          `qu_perck_id`,      <!--16、审核人员id-->
+          `qu_perck_name`,    <!--17、审核人员name-->
+          `qu_checkstatus`    <!--18、是否审核  (1代表审核，0代表未审核)-->
+        )
+        VALUES
+          (
+            #{sSellQuote.qu_id},
+            #{sSellQuote.qu_cid},
+            #{sSellQuote.qu_cname},
+            #{sSellQuote.qu_caddress},
+            #{sSellQuote.qu_date},
+            #{sSellQuote.qu_effectdate},
+            #{sSellQuote.qu_pricetax},
+            #{sSellQuote.qu_moneytype},
+            #{sSellQuote.qu_ exchangerate},
+            #{sSellQuote.qu_peoyw_id},
+            #{sSellQuote.qu_peoyw_name},
+            #{sSellQuote.qu_emp_id},
+            #{sSellQuote.qu_emp_name},
+            #{sSellQuote.qu_perzd_id},
+            #{sSellQuote.qu_perzd_name},
+            #{sSellQuote.qu_perck_id},
+            #{sSellQuote.qu_perck_name},
+            #{sSellQuote.qu_checkstatus}
+          ) ;
+          <if test="sSellQuote.sSellQuoteparticulars.size!=0">
+            INSERT INTO `navigator`.`s_sell_ quoteparticular` (
+            `qp_id`,              <!--栏号-->
+            `qp_quid`,            <!--单据号码-->
+            `qp_ materielid`,     <!--物料编号-->
+            `qp_ materielname`,   <!--物料名称-->
+            `qp_model`,           <!--规格型号-->
+            `qp_unitname`,        <!--单位名称-->
+            `qp_number`,          <!--数量-->
+            `qp_ discountprice`,  <!--折扣前单价-->
+            `qp_ discount`,       <!--折数-->
+            `qp_price`,           <!--单价-->
+            `qp_sum`,             <!--金额-->
+            `qp_rate`,            <!--税率-->
+            `qp_tatemoney`,       <!--税额-->
+            `qp_totalmoney`,      <!--含税金额-->
+            `qp_ largess`,        <!--赠品  （1代表是、0代表否）-->
+            `qp_remark`           <!--备注-->
+            )
+            VALUES
+            <foreach collection="sSellQuote.sSellQuoteparticulars" item="temp" separator=",">
+              (
+              #{temp.qp_id},
+              #{temp.qp_quid},
+              #{temp.qp_ materielid},
+              #{temp.qp_ materielname},
+              #{temp.qp_model},
+              #{temp.qp_unitname},
+              #{temp.qp_number},
+              #{temp.qp_ discountprice},
+              #{temp.qp_ discount},
+              #{temp.qp_price},
+              #{temp.qp_sum},
+              #{temp.qp_rate},
+              #{temp.qp_tatemoney},
+              #{temp.qp_totalmoney},
+              #{temp.qp_ largess},
+              #{temp.qp_remark}
+              )
+            </foreach>
+            ;
+          </if>
+
+    </insert>
+</mapper>

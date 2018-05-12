@@ -1,0 +1,49 @@
+.gongyong {
+    padding: 15px;
+    padding-left: 10%;
+    float: left;
+}
+
+.gongyong div {
+    text-align: center;
+}
+
+.caigou {
+    padding: 15px;
+    padding-left: 15%;
+    float: left;
+}
+
+.caigou div {
+    text-align: center;
+}
+
+.kucun {
+    padding: 15px;
+    padding-left: 15%;
+    float: left;
+}
+
+.kucun div {
+    text-align: center;
+}
+
+.xiaoshou {
+    padding: 15px;
+    padding-left: 22%;
+    float: left;
+}
+
+.xiaoshou div {
+    text-align: center;
+}
+
+.zhangkuan {
+    padding: 15px;
+    padding-left: 22%;
+    float: left;
+}
+
+.zhangkuan div {
+    text-align: center;
+}
