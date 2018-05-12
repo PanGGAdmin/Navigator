@@ -20,7 +20,7 @@ var layuimodel2 = function(title, content, id) {
     layer.open({
         type: 1, //此处以页面层举例
         title: title,
-        area: ['900px', 'auto'],
+        area: ['950px', 'auto'],
         shade: 0,
         maxmin: true,
         id: id,

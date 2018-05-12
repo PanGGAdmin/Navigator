@@ -46,7 +46,9 @@ public interface SalesQuotationMapper {
      * 按日期查询做大订单号     * @param dateStr
      * @return
      */
-    public String queryMaxQuId(@Param("dateStr") String dateStr);
+    public Long  queryMaxQuId(@Param("dateStr") String dateStr);
+
+    public SSellQuote querySellQuote(@Param("pageSize") int pageSize);
 
     /**
      * 主从新增销售报价单

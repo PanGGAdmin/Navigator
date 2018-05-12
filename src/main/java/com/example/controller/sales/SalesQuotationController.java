@@ -87,6 +87,22 @@ public class SalesQuotationController {
     }
 
     /**
+     * 查询首页数据
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("querySellQuote")
+    public SSellQuote querySellQuote(int pageSize){
+//        SSellQuote s = salesQuotationService.querySellQuote(0);
+//        System.out.print(s.getQuId());
+//        System.out.print(s.getQuCname());
+        //System.out.print(s.getsSellQuoteparticulars().get(0).getQpId());
+        System.out.print(pageSize);
+        return salesQuotationService.querySellQuote(pageSize);
+    }
+
+
+    /**
      * 主从新增销售报价单
      * @param sSellQuote
      * @return

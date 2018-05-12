@@ -1,6 +1,7 @@
 package com.example.pojo.account.yxppojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/5/10.
@@ -58,13 +59,13 @@ public class checklist {
     }
 
 
-    private checkdetailed cdetailed;
+    private List<checkdetailed> cdetailed;
 
-    public checkdetailed getCdetailed() {
+    public List<checkdetailed> getCdetailed() {
         return cdetailed;
     }
 
-    public void setCdetailed(checkdetailed cdetailed) {
+    public void setCdetailed(List<checkdetailed> cdetailed) {
         this.cdetailed = cdetailed;
     }
 }

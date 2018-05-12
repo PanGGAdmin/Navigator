@@ -1,5 +1,8 @@
 package com.example.pojo.procurement;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +13,7 @@ public class Requisitions {
 
     private String billno;//当前日期+三位流水号	单据号码
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date billdate;//当前日期	单据日期
 
     private String billstyleid;//	采购请购类型（关联采购请购类别设定）

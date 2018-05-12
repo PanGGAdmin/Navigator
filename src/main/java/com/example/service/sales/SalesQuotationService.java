@@ -57,12 +57,17 @@ public class SalesQuotationService {
      * @return
      */
     public String queryMaxQuId(String dateStr){
-        String quId=salesQuotationMapper.queryMaxQuId(dateStr);
+        Long quId=salesQuotationMapper.queryMaxQuId(dateStr);
         if(quId!=null){
-            return Integer.parseInt(quId)+1+"";
+            return quId+1+"";
         }
         return dateStr.replace("-","")+"01";
     }
+
+    public SSellQuote querySellQuote(int pageSize){
+        return salesQuotationMapper.querySellQuote((pageSize-1)*1);
+    }
+
     /**
      * 主从新增销售报价单
      * @param sSellQuote

@@ -2,5 +2,167 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 采购请购MapperXml-->
 <mapper namespace="com.example.mapper.procurement.PurchaseRequisitionMapper">
+    <!--分页查询采购请购单据-->
+    <select id="hjl_pageSelect" resultType="com.example.pojo.procurement.Requisitions">
+        select
+        	*
+        from
+	    navigator.requisitions
+	    where deleteStatus=1
+	    limit #{pageIndex}, 1;
+    </select>
+    <!--分页查询采购请购单据总条数-->
+    <select id="hjl_count" resultType="int">
+        select
+        	count(*)
+        from
+	    navigator.requisitions
+    </select>
+    <!--查询采购请购单明细表-->
+    <select id="hjl_detail" resultType="com.example.pojo.procurement.Requisitions_detail">
+        select
+         *
+        from
+        navigator.requisitions_detail where billNo=#{billno}
+    </select>
+    <!--查询物料主文件表信息-->
+
+    <!--查询销售订单信息-->
+
+    <!--查询当天最大的单据号码-->
+    <select id="hjl_maxBillno" resultType="string">
+      SELECT max(billNo) FROM requisitions WHERE billDate = #{billDate};
+    </select>
+    <!--新增采购请购单据-->
+    <insert id="hjl_insert">
+    insert into navigator.requisitions
+        (billNo,
+        billDate,
+        billStyleID,
+        billStatus,
+        salesID,
+        departID,
+        maker,
+        permitter,
+        headerID,
+        footerID,
+        userDef1,
+        userDef2,
+        remark,
+        deleteStatus
+        )
+        values
+        (#{billNo},
+        #{billDate},
+        #{billStyleID},
+        #{billStatus},
+        #{salesID},
+        #{departID},
+        #{maker},
+        #{permitter},
+        #{headerID},
+        #{footerID},
+        #{userDef1},
+        #{userDef2},
+        #{remark},
+        #{deleteStatus}
+        );
+        </insert>
+        <!--新增采购单据从表信息-->
+        <insert id="hjl_insertDetail">
+        insert into navigator.requisitions_detail
+            (serNO,
+            billNo,
+            prodID,
+            prodName,
+            predSize,
+            unitName,
+            sQuantity,
+            currID,
+            sPrice,
+            amount,
+            lastestCurrID,
+            lastestPrice,
+            lastestsPrice,
+            preInDate,
+            suggestPurDate,
+            qtyRemain,
+            itemRemark,
+            tranType,
+            tranNO,
+            deleteStatus
+            )
+            values
+            (#{serNO},
+            #{billNo},
+            #{prodID},
+            #{prodName},
+            #{predSize},
+            #{unitName},
+            #{sQuantity},
+            #{currID},
+            #{sPrice},
+            #{amount},
+            #{lastestCurrID},
+            #{lastestPrice},
+            #{lastestsPrice},
+            #{preInDate},
+            #{suggestPurDate},
+            #{qtyRemain},
+            #{itemRemark},
+            #{tranType},
+            #{tranNO},
+            #{deleteStatus}
+            );
+
+        </insert>
+        <!--修改采购请购单据主表信息-->
+        <update id="hjl_update">
+        update navigator.requisitions
+            set
+            billNo = #{billNo} ,
+            billDate = #{billDate} ,
+            billStyleID = #{billStyleID} ,
+            billStatus = #{billStatus} ,
+            salesID = #{salesID} ,
+            departID = #{departID} ,
+            maker = #{maker} ,
+            permitter = #{permitter} ,
+            headerID = #{headerID} ,
+            footerID = #{footerID} ,
+            userDef1 = #{userDef1} ,
+            userDef2 = #{userDef2} ,
+            remark = #{remark} ,
+            deleteStatus =#{deleteStatus}
+            where
+            billNo = #{billNo} ;
+        </update>
+    <!--修改采购请购单据从表信息-->
+        <update id="hjl_updateDetail">
+        update navigator.requisitions_detail
+            set
+            prodID = #{prodID} ,
+            sQuantity = #{sQuantity} ,
+            preInDate = #{preInDate} ,
+            itemRemark = #{itemRemark} ,
+            where
+            billNo = #{billNo} ;
+        </update>
+        <!--删除采购请购单据，将删除状态1可见改为删除状态0不可见-->
+        <update id="hjl_delete">
+           update navigator.requisitions
+        set
+            deleteStatus =  0
+        where
+            billNo = #{billNo} ;
+        </update>
+    <!--删除采购请购单据，将删除状态1可见改为删除状态0不可见-->
+    <update id="hjl_deleteDetail">
+        update navigator.requisitions_detail
+        set
+        deleteStatus =  0
+        where
+        billNo = #{billNo} ;
+    </update>
 
 </mapper>

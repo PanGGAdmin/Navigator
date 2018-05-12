@@ -27,7 +27,7 @@
         }
 
         #gongneng {
-            padding-left: 10px;
+            padding-left: 15%;
         }
     </style>
 </head>
@@ -109,14 +109,14 @@
         <div class="layui-inline ">
             <label class="layui-form-label " style="color:#01AAED; ">盘点人员</label>
             <div class="layui-input-inline ">
-                <input type="text " id="pandianuserId" name="number " lay-verify="required|number " autocomplete="off " class="layui-input " disabled=" ">
+                <input type="text " id="pandianuserId" name="number " lay-verify="required|number " autocomplete="off " class="layui-input " >
             </div>
         </div>
 
         <div class="layui-inline ">
             <label class="layui-form-label ">制单人员</label>
             <div class="layui-input-inline ">
-                <input type="text " id="zhidanuserId" name="text " lay-verify="email " autocomplete="off " class="layui-input " disabled=" ">
+                <input type="text " id="zhidanuserId" name="text " lay-verify="email " autocomplete="off " class="layui-input " >
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
         <div class="layui-inline ">
             <label class="layui-form-label " style="color:#01AAED; ">所属部门</label>
             <div class="layui-input-inline ">
-                <input type="text " id="departmentId" name="number " lay-verify="required|number " autocomplete="off " class="layui-input " disabled=" ">
+                <input type="text " id="departmentId" name="number " lay-verify="required|number " autocomplete="off " class="layui-input " >
             </div>
         </div>
 
@@ -262,24 +262,7 @@ jQuery(function () {
     $("#nextpage").click(function() {
         show($(this).attr("data-currpage"));
     });
-    //新增一行表单的方法
-    function addtr() {
-        var $tb = $("#tb");
 
-        var $tr = $("<tr></tr>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tr.append("<td></td>");
-        $tb.append($tr);
-    }
     //单击新增按钮
     $("#add").click(function() {
         zhuangtian(0);
@@ -291,6 +274,7 @@ jQuery(function () {
         $("#zhidanuserId").val("");
         $("#fuheuserId").val("");
         var $tb = $("#tb").html("");
+        addtr();
         //禁用其他按钮
         $("#zairu").removeAttr("disabled");
         $("#prevpage").attr("disabled","disabled");
@@ -305,8 +289,62 @@ jQuery(function () {
     });
     $("#clDate").change(function () {
         var date = $(this).val();
-        alert(date);
+        $.ajax({
+            type: "post",
+            url: "/Inventory/changedate",
+            data: {cldate:date},
+            success: function (result) {
+                $("#clId").val(result);
+            }
+        });
     });
+    //获取文本框中的数据 并返回一个对象
+    function huoqu(){
+        var checkdetailed = [];
+        var tr = $("#tb>tr");
+        tr.each(function (i,obj) {
+            checkdetailed.push({
+                "columId":$(obj).find("#columId").text(),
+                "clId":$(obj).find("#maid").attr("data-maid"),
+                "zhangmianCount":$(obj).find("#zhangmianCount").text(),
+                "pandianCount":$(obj).find("#pdcount").val(),
+                "yingkuiCount":$(obj).find("#yingkuiCount").text(),
+                "price":$(obj).find("#price").val(),
+                "yingkuiPrice":$(obj).find("#yingkuiPrice").text(),
+                "cause":$(obj).find("#cause").val()
+            });
+
+        });
+        if($("#warehouseId").val()=="")
+        {
+            alert("请先填写仓库");
+            return 0;
+        }
+        else if($("#clDate").val()=="")
+        {
+            alert("单据时间不能为空");
+            return 0;
+        }
+        else if($("#pandianuserId").val()=="")
+        {
+            alert("盘点人员不能为空");
+            return 0;
+        }
+        else{
+            var checklist = {
+                "clId" : $("#clId").val(),
+                "warehouseId" :  $("#warehouseId").val(),
+                "clDate" : $("#clDate").val(),
+                "pandianuserId" : $("#pandianuserId").val(),
+                "departmentId" : $("#departmentId").val(),
+                "zhidanuserId" : $("#zhidanuserId").val(),
+                "fuheuserId" : $("#fuheuserId").val(),
+                "cdetailed" : checkdetailed
+            }
+            return checklist;
+        }
+
+    }
     //单击修改按钮
     $("#update").click(function() {
         var fuheren = $("#fuheuserId").val();
@@ -326,25 +364,51 @@ jQuery(function () {
             $("#baocun").removeAttr("disabled");
         }
     });
+    //新增一行表单的方法
+    function addtr() {
+        var $tb = $("#tb");
+
+        var $tr = $("<tr></tr>");
+        $tr.append("<td id='columId'>1</td>");
+        $tr.append("<td data-maid='222'id='maid'><input type='text' class='layui-input' disabled='disabled' value='555'/></td>");
+        $tr.append("<td id='columId'>mad</td>");
+        $tr.append("<td id='columId'></td>");
+        $tr.append("<td id='columId'></td>");
+        $tr.append("<td id='zhangmianCount'></td>");
+        $tr.append("<td><input type='text' id='pdcount' class='layui-input' value=''/></td>");
+        $tr.append("<td id='yingkuiCount'></td>");
+        $tr.append("<td><input type='text' id='price' class='layui-input' value=''/></td>");
+        $tr.append("<td id='yingkuiPrice'></td>");
+        $tr.append("<td><input type='text' id='cause' class='layui-input' value='暂无原因'/></td>");
+        $tb.append($tr);
+    }
+
+
     //单击保存按钮
     $("#baocun").click(function() {
-        /*$("#clId").val();
-         $("#warehouseId").val();
-         $("#clDate").val();
-         $("#pandianuserId").val();
-         $("#departmentId").val();
-         $("#zhidanuserId").val();
-         $("#fuheuserId").val();*/
-        //禁用其他按钮
-        $("#zairu").attr("disabled","disabled");
-        $("#prevpage").removeAttr("disabled");
-        $("#nextpage").removeAttr("disabled");
-        $("#clickquxiao").removeAttr("disabled");
-        $("#clickfuhe").removeAttr("disabled");
-        $("#add").removeAttr("disabled");
-        $("#update").removeAttr("disabled");
-        $("#delete").removeAttr("disabled");
-        $("#baocun").attr("disabled","disabled");
+
+        var checklist = huoqu();
+        if(checklist!=0){
+
+            $.ajax({
+                type: "post",
+                url: "/Inventory/addcl",
+                data: JSON.stringify(checklist),
+                contentType:"application/json",
+                datatype:"json",
+                success: function (result) {
+                    $("#zairu").attr("disabled","disabled");
+                    $("#prevpage").removeAttr("disabled");
+                    $("#nextpage").removeAttr("disabled");
+                    $("#clickquxiao").removeAttr("disabled");
+                    $("#clickfuhe").removeAttr("disabled");
+                    $("#add").removeAttr("disabled");
+                    $("#update").removeAttr("disabled");
+                    $("#delete").removeAttr("disabled");
+                    $("#baocun").attr("disabled","disabled");
+                }
+            });
+        }
 
     });
 </script>

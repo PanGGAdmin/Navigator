@@ -24,13 +24,28 @@
   </select>
 
   <!--按日期查询做大订单号-->
-  <select id="queryMaxQuId" resultType="String">
-    SELECT MAX(`qu_id`) FROM `s_sell_ quote` WHERE `qu_date`=#{dateStr};
+  <select id="queryMaxQuId" resultType="java.lang.Long">
+    SELECT MAX(`quId`) FROM `s_sell_quote` WHERE `quDate`=#{dateStr};
+  </select>
+
+  <resultMap id="SSellQuoteMap" type="com.example.pojo.sales.SSellQuote">
+    <id column="quId" property="quId"/>
+    <collection property="sSellQuoteparticulars" column="quId" select="querySSellOrderparticular">
+      <id column="opaLineId" property="opaLineId"></id>
+    </collection>
+  </resultMap>
+  <select id="querySSellOrderparticular" resultType="com.example.pojo.sales.SSellQuoteparticular">
+      SELECT * FROM `s_sell_quoteparticular` WHERE qpQuid=#{0}
+  </select>
+
+
+  <select id="querySellQuote" resultMap="SSellQuoteMap">
+    SELECT * FROM `s_sell_quote` ORDER BY `quId` DESC  LIMIT #{pageSize},1;
   </select>
 
   <!--主从新增销售报价单-->
     <insert id="saveSalesQuotation">
-        INSERT INTO `navigator`.`s_sell_ quote` (
+        INSERT INTO `navigator`.`s_sell_quote` (
           `qu_id`,            <!--1、单据号码-->
           `qu_cid`,           <!--2、客户编号id-->
           `qu_cname`,         <!--3、客户名称-->

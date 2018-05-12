@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
-    <classPathEntry location="D:\mvn_repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />
+    <classPathEntry location="D:\maven_repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />
 
     <context id="wangyongzhi_mysql_tables" targetRuntime="MyBatis3">
         <!-- 防止生成的代码中有很多注释，加入下面的配置控制 -->
@@ -26,23 +26,28 @@
         </javaTypeResolver>
 
         <!-- 数据表对应的pojo层  -->
-        <javaModelGenerator targetPackage="com.example.pojo.gongyong" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.example.pojo.test" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <!-- sql mapper 映射配置文件
+        <!-- sql mapper 映射配置文件-->
         <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
-        </sqlMapGenerator> -->
+        </sqlMapGenerator>
 
-        <!-- mybatis3中的mapper接口
+        <!-- mybatis3中的mapper接口-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.dao"  targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
-        </javaClientGenerator>-->
+            <property name="enableSubP ackages" value="true" />
+        </javaClientGenerator>
 
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO 可以有多个table标签-->
-        <table schema="navigator" tableName="t_potential_client_master_file_address" domainObjectName="TPotentialClientMasterFileAddress"
+        <table schema="navigator" tableName="s_sell_quote" domainObjectName="SSellOrde"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table schema="navigator" tableName="s_sell_quoteparticular" domainObjectName="SSellOrderparticula"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

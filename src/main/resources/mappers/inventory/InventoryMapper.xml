@@ -3,7 +3,7 @@
 <!-- 盘点单MapperXml-->
 <mapper namespace="com.example.mapper.inventory.InventoryMapper">
 
-
+    <!--查询盘点单中的一条数据+分页-->
     <select id="selectcl" resultType="com.example.pojo.account.yxppojo.checklist">
         select 	clId,
         cldate,
@@ -12,24 +12,36 @@
         departmentId,
         zhidanuserId,
         fuheuserId
-
         from
         navigator.checklist
         group by cldate desc
         limit #{currpage}, 1;
     </select>
-    <select id="selectcd" resultType="com.example.pojo.account.yxppojo.checkdetailed">
-       select 	clId,
-        columnId,
-        materielId,
-        zhangmianCount,
-        pandianCount,
-        price,
-        yingkuiPrice,
-        cause
-
+    <!--查询盘点单中的总记录数-->
+    <select id="selectckcount" resultType="java.lang.Integer">
+        select 	count(*)
         from
-        navigator.checkdetailed
+        navigator.checklist
+    </select>
+
+    <!--查询盘点明细表-->
+    <select id="selectcd" resultType="com.example.pojo.account.yxppojo.checkdetailed">
+       select 	cd.clId,
+        cd.columnId,
+        cd.materielId,
+        cd.zhangmianCount,
+        cd.pandianCount,
+        cd.price,
+        cd.yingkuiPrice,
+        cd.cause,
+        cd.yingkuiCount,
+        ma.BianHao as 'ma.BianHao',
+        ma.Name as 'ma.Name',
+        ma.Model as 'ma.Model',
+        ma.JilLiangDanWei as 'JilLiangDanWei'
+        from
+        navigator.checkdetailed as cd
+	inner join master as ma on(cd.materielId=ma.Id)
         where clId = #{clid}
     </select>
 
@@ -42,12 +54,65 @@
 	pandianCount = #{pandianCount} ,
 	price = #{price} ,
 	yingkuiPrice = #{yingkuiPrice} ,
-	cause = #{cause}
+	cause = #{cause},
+    yingkuiCount =  #{yingkuiCount}
 
 	where
 	clId = 'clId' and columnId = #{columnId} ;
 
     </update>
+
+    <insert id="addck">
+insert into navigator.checklist
+	(clId,
+	cldate,
+	warehouseId,
+	pandianuserId,
+	departmentId,
+	zhidanuserId,
+	fuheuserId
+	)
+	values
+	(#{cl.clId},
+	#{cl.clDate},
+	#{cl.warehouseId},
+	#{cl.pandianuserId},
+	#{cl.departmentId},
+	#{cl.zhidanuserId},
+	#{cl.fuheuserId}
+	);
+
+    </insert>
+    <insert id="addcd">
+
+insert into navigator.checkdetailed
+	(clId,
+	columnId,
+	materielId,
+	zhangmianCount,
+	pandianCount,
+	yingkuiCount,
+	price,
+	yingkuiPrice,
+	cause
+	)
+	values
+	(#{clid},
+	#{cd.columId},
+	#{cd.materielId},
+	#{cd.zhangmianCount},
+	#{cd.pandianCount},
+	#{cd.yingkuiCount},
+	#{cd.price},
+	#{cd.yingkuiPrice},
+	#{cd.cause}
+	);
+
+    </insert>
+
+	<select id="queryDocumentsDate" resultType="Long">
+		SELECT MAX(clId) FROM navigator.checklist  WHERE clId =#{documentsdate};
+	</select>
 
 
 </mapper>

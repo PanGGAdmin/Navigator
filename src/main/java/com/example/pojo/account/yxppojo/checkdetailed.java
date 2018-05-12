@@ -1,4 +1,5 @@
 package com.example.pojo.account.yxppojo;
+import com.example.pojo.pricing.Master;
 
 /**
  * Created by Administrator on 2018/5/10.
@@ -10,6 +11,7 @@ public class checkdetailed {
     private String materielId;          //物料编号
     private double zhangmianCount;      //账面数量
     private double pandianCount;        //盘点数量
+    private double yingkuiCount;        //盈亏数量
     private double price;               //单价
     private double yingkuiPrice;        //盈亏金额
     private String cause;               //原因
@@ -62,4 +64,21 @@ public class checkdetailed {
         this.cause = cause;
     }
 
+    public double getYingkuiCount() {
+        return yingkuiCount;
+    }
+
+    public void setYingkuiCount(double yingkuiCount) {
+        this.yingkuiCount = yingkuiCount;
+    }
+
+    private Master ma;
+
+    public Master getMa() {
+        return ma;
+    }
+
+    public void setMa(Master ma) {
+        this.ma = ma;
+    }
 }
