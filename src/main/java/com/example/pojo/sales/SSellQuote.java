@@ -10,9 +10,13 @@ import java.util.List;
 public class SSellQuote {
     private String quId;            //1、单据号码
 
-    private Integer quCid;          //2、客户编号id
+    private String quCid;          //2、客户编号id
 
     private String quCname;         //3、客户名称
+
+    private String quCtype;        //客户类别
+
+    private Integer quCaddressId;//2.5送货地址ID
 
     private String quCaddress;      //4、送货地址（客户表中带出）
 
@@ -54,9 +58,7 @@ public class SSellQuote {
         this.quId = quId == null ? null : quId.trim();
     }
 
-    public Integer getQuCid() {
-        return quCid;
-    }
+
 
     public List<SSellQuoteparticular> getsSellQuoteparticulars() {
         return sSellQuoteparticulars;
@@ -66,7 +68,11 @@ public class SSellQuote {
         this.sSellQuoteparticulars = sSellQuoteparticulars;
     }
 
-    public void setQuCid(Integer quCid) {
+    public String getQuCid() {
+        return quCid;
+    }
+
+    public void setQuCid(String quCid) {
         this.quCid = quCid;
     }
 
@@ -196,5 +202,21 @@ public class SSellQuote {
 
     public void setQuCheckstatus(Integer quCheckstatus) {
         this.quCheckstatus = quCheckstatus;
+    }
+
+    public Integer getQuCaddressId() {
+        return quCaddressId;
+    }
+
+    public void setQuCaddressId(Integer quCaddressId) {
+        this.quCaddressId = quCaddressId;
+    }
+
+    public String getQuCtype() {
+        return quCtype;
+    }
+
+    public void setQuCtype(String quCtype) {
+        this.quCtype = quCtype;
     }
 }

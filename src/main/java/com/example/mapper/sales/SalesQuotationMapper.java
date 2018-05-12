@@ -48,7 +48,11 @@ public interface SalesQuotationMapper {
      */
     public Long  queryMaxQuId(@Param("dateStr") String dateStr);
 
+    public Integer querySellQuoteCount();
+
     public SSellQuote querySellQuote(@Param("pageSize") int pageSize);
+
+    public int delSalesQuotation(@Param("quid") String quid);
 
     /**
      * 主从新增销售报价单

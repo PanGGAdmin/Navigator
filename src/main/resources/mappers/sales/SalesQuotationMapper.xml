@@ -39,95 +39,102 @@
   </select>
 
 
+  <select id="querySellQuoteCount" resultType="int">
+    SELECT COUNT(*) FROM `s_sell_quote`;
+  </select>
   <select id="querySellQuote" resultMap="SSellQuoteMap">
     SELECT * FROM `s_sell_quote` ORDER BY `quId` DESC  LIMIT #{pageSize},1;
   </select>
 
+  <delete id="delSalesQuotation">
+    DELETE FROM `s_sell_quoteparticular` WHERE `qpQuid` = #{quid};
+    DELETE FROM `s_sell_quote` WHERE `quId` = #{quid};
+  </delete>
+
   <!--主从新增销售报价单-->
     <insert id="saveSalesQuotation">
         INSERT INTO `navigator`.`s_sell_quote` (
-          `qu_id`,            <!--1、单据号码-->
-          `qu_cid`,           <!--2、客户编号id-->
-          `qu_cname`,         <!--3、客户名称-->
-          `qu_caddress`,      <!--4、送货地址（客户表中带出）-->
-          `qu_date`,          <!--5、单据日期-->
-          `qu_effectdate`,    <!--6、有效日期-->
-          `qu_pricetax`,      <!--7、单价是否含税 (1代表是0代表否)-->
-          `qu_moneytype`,     <!--8、币别-->
-          `qu_ exchangerate`, <!--9、汇率-->
-          `qu_peoyw_id`,      <!--10、业务人员id-->
-          `qu_peoyw_name`,    <!--11、业务人员名称-->
-          `qu_emp_id`,        <!--12、所属部门id-->
-          `qu_emp_name`,      <!--13、所属部门名称-->
-          `qu_perzd_id`,      <!--14、制单人员id-->
-          `qu_perzd_name`,    <!--15、制单人员名称-->
-          `qu_perck_id`,      <!--16、审核人员id-->
-          `qu_perck_name`,    <!--17、审核人员name-->
-          `qu_checkstatus`    <!--18、是否审核  (1代表审核，0代表未审核)-->
+          `quId`,            <!--1、单据号码-->
+          `quCid`,           <!--2、客户编号id-->
+          `quCname`,         <!--3、客户名称-->
+          `quCtype`,          <!--客户类别-->
+          `quCaddressId`,     <!--4、送货地址id（客户表中带出）-->
+          `quCaddress`,      <!--4、送货地址（客户表中带出）-->
+          `quDate`,          <!--5、单据日期-->
+          `quEffectdate`,    <!--6、有效日期-->
+          `quPricetax`,      <!--7、单价是否含税 (1代表是0代表否)-->
+          `quMoneytype`,     <!--8、币别-->
+          `quExchangerate`, <!--9、汇率-->
+      <!--`quPeoyw_id`,      10、业务人员id-->
+          `quPeoywName`,    <!--11、业务人员名称-->
+      <!-- `quEmp_id`,        12、所属部门id-->
+          `quEmpName`,      <!--13、所属部门名称-->
+      <!--`quPerzd_id`,      14、制单人员id-->
+          `quPerzdName`,    <!--15、制单人员名称-->
+      <!--`quPerck_id`,      16、审核人员id-->
+          `quPerckName`,    <!--17、审核人员name-->
+          `quCheckstatus`    <!--18、是否审核  (1代表审核，0代表未审核)-->
         )
         VALUES
           (
-            #{sSellQuote.qu_id},
-            #{sSellQuote.qu_cid},
-            #{sSellQuote.qu_cname},
-            #{sSellQuote.qu_caddress},
-            #{sSellQuote.qu_date},
-            #{sSellQuote.qu_effectdate},
-            #{sSellQuote.qu_pricetax},
-            #{sSellQuote.qu_moneytype},
-            #{sSellQuote.qu_ exchangerate},
-            #{sSellQuote.qu_peoyw_id},
-            #{sSellQuote.qu_peoyw_name},
-            #{sSellQuote.qu_emp_id},
-            #{sSellQuote.qu_emp_name},
-            #{sSellQuote.qu_perzd_id},
-            #{sSellQuote.qu_perzd_name},
-            #{sSellQuote.qu_perck_id},
-            #{sSellQuote.qu_perck_name},
-            #{sSellQuote.qu_checkstatus}
+            #{sSellQuote.quId},
+            #{sSellQuote.quCid},
+            #{sSellQuote.quCname},
+            #{sSellQuote.quCtype},
+            #{sSellQuote.quCaddressId},
+            #{sSellQuote.quCaddress},
+            #{sSellQuote.quDate},
+            #{sSellQuote.quEffectdate},
+            #{sSellQuote.quPricetax},
+            #{sSellQuote.quMoneytype},
+            #{sSellQuote.quExchangerate},
+            #{sSellQuote.quEmpName},
+            #{sSellQuote.quPerzdName},
+            #{sSellQuote.quPerckName},
+            #{sSellQuote.quEmpName},
+            #{sSellQuote.quCheckstatus}
           ) ;
-          <if test="sSellQuote.sSellQuoteparticulars.size!=0">
-            INSERT INTO `navigator`.`s_sell_ quoteparticular` (
-            `qp_id`,              <!--栏号-->
-            `qp_quid`,            <!--单据号码-->
-            `qp_ materielid`,     <!--物料编号-->
-            `qp_ materielname`,   <!--物料名称-->
-            `qp_model`,           <!--规格型号-->
-            `qp_unitname`,        <!--单位名称-->
-            `qp_number`,          <!--数量-->
-            `qp_ discountprice`,  <!--折扣前单价-->
-            `qp_ discount`,       <!--折数-->
-            `qp_price`,           <!--单价-->
-            `qp_sum`,             <!--金额-->
-            `qp_rate`,            <!--税率-->
-            `qp_tatemoney`,       <!--税额-->
-            `qp_totalmoney`,      <!--含税金额-->
-            `qp_ largess`,        <!--赠品  （1代表是、0代表否）-->
-            `qp_remark`           <!--备注-->
-            )
-            VALUES
-            <foreach collection="sSellQuote.sSellQuoteparticulars" item="temp" separator=",">
-              (
-              #{temp.qp_id},
-              #{temp.qp_quid},
-              #{temp.qp_ materielid},
-              #{temp.qp_ materielname},
-              #{temp.qp_model},
-              #{temp.qp_unitname},
-              #{temp.qp_number},
-              #{temp.qp_ discountprice},
-              #{temp.qp_ discount},
-              #{temp.qp_price},
-              #{temp.qp_sum},
-              #{temp.qp_rate},
-              #{temp.qp_tatemoney},
-              #{temp.qp_totalmoney},
-              #{temp.qp_ largess},
-              #{temp.qp_remark}
-              )
-            </foreach>
-            ;
-          </if>
+      <if test="sSellQuote.sSellQuoteparticulars.size != 0">
+        INSERT INTO `navigator`.`s_sell_ quoteparticular` (
+        `qpQuid`,  <!--单据号码-->
+        `qpMaterielid`,  <!--物料编号-->
+        `qpMaterielname`,  <!--物料名称-->
+        `qpModel`,  <!--规格型号-->
+        `qpUnitname`,  <!--单位名称-->
+        `qpNumber`,  <!--数量-->
+        `qpDiscountprice`,  <!--折扣前单价-->
+        `qpDiscount`,  <!--折数-->
+        `qpPrice`,  <!--单价-->
+        `qpSum`,  <!--金额-->
+        `qpRate`,  <!--税率-->
+        `qpTatemoney`,  <!--税额-->
+        `qpTotalmoney`,  <!--含税金额-->
+        `qpLargess`,  <!--赠品  （1代表是、0代表否）-->
+        `qpRemark`  <!--备注-->
+        )
+        VALUES
+        <foreach collection="sSellQuote.sSellQuoteparticulars" item="temp"
+                 separator=",">
+          (
+          #{sSellQuote.qpQuid},
+          #{temp.qpMaterielid},
+          #{temp.qpMaterielname},
+          #{temp.qpModel},
+          #{temp.qpUnitname},
+          #{temp.qpNumber},
+          #{temp.qpDiscountprice},
+          #{temp.qpDiscount},
+          #{temp.qpPrice},
+          #{temp.qpSum},
+          #{temp.qpRate},
+          #{temp.qpTatemoney},
+          #{temp.qpTotalmoney},
+          #{temp.qpLargess},
+          #{temp.qpRemark}
+          )
+        </foreach>
+        ;
+      </if>
 
     </insert>
 </mapper>

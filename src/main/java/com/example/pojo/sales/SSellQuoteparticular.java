@@ -32,7 +32,7 @@ public class SSellQuoteparticular {
 
     private Double qpTotalmoney;        //含税金额
 
-    private Integer qpLargess;          //赠品  （1代表是、0代表否）
+    private String qpLargess;          //赠品  （1代表是、0代表否）
 
     private String qpRemark;            //备注
 
@@ -158,11 +158,11 @@ public class SSellQuoteparticular {
         this.qpTotalmoney = qpTotalmoney;
     }
 
-    public Integer getQpLargess() {
+    public String getQpLargess() {
         return qpLargess;
     }
 
-    public void setQpLargess(Integer qpLargess) {
+    public void setQpLargess(String qpLargess) {
         this.qpLargess = qpLargess;
     }
 

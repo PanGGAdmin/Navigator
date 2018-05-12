@@ -64,6 +64,10 @@ public class SalesQuotationService {
         return dateStr.replace("-","")+"01";
     }
 
+    public Integer querySellQuoteCount(){
+        return salesQuotationMapper.querySellQuoteCount();
+    }
+
     public SSellQuote querySellQuote(int pageSize){
         return salesQuotationMapper.querySellQuote((pageSize-1)*1);
     }
@@ -74,6 +78,11 @@ public class SalesQuotationService {
      * @return
      */
     public int saveSalesQuotation(SSellQuote sSellQuote){
+        salesQuotationMapper.delSalesQuotation(sSellQuote.getQuId());
         return salesQuotationMapper.saveSalesQuotation(sSellQuote);
+    }
+
+    public int delSalesQuotation(String quid){
+        return salesQuotationMapper.delSalesQuotation(quid);
     }
 }

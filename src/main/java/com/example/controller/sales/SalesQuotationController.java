@@ -5,7 +5,9 @@ import com.example.pojo.procurement.Client_masterfile;
 import com.example.pojo.procurement.Client_masterfile_address;
 import com.example.pojo.sales.SSellQuote;
 import com.example.service.sales.SalesQuotationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -92,13 +94,20 @@ public class SalesQuotationController {
      * @return
      */
     @RequestMapping("querySellQuote")
-    public SSellQuote querySellQuote(int pageSize){
-//        SSellQuote s = salesQuotationService.querySellQuote(0);
-//        System.out.print(s.getQuId());
-//        System.out.print(s.getQuCname());
-        //System.out.print(s.getsSellQuoteparticulars().get(0).getQpId());
-        System.out.print(pageSize);
-        return salesQuotationService.querySellQuote(pageSize);
+    public Map<String,Object> querySellQuote(Integer pageSize){
+        Map<String,Object> map = new HashMap<String,Object>();
+        int count = salesQuotationService.querySellQuoteCount();
+        int currpage=1;
+        if(pageSize!=null){
+            currpage=pageSize;
+        }
+        int perPage=currpage-1>0?currpage-1:1;
+        int nextPage=currpage+1>=count?count:currpage+1;
+        map.put("maxPage",count);
+        map.put("perPage",perPage);
+        map.put("nextPage",nextPage);
+        map.put("querySellQuoteData",salesQuotationService.querySellQuote(currpage));
+        return map;
     }
 
 
@@ -108,9 +117,12 @@ public class SalesQuotationController {
      * @return
      */
     @RequestMapping("/saveSalesQuotation")
-    public Map<String,Object> saveSalesQuotation(SSellQuote sSellQuote){
+    public Map<String,Object> saveSalesQuotation(@RequestBody SSellQuote sSellQuote){
         Map<String,Object> map=new HashMap<String,Object>();
         try {
+            /*ObjectMapper mapper = new ObjectMapper();
+            // 将json字符串解析为一个Java对象
+            SSellQuote sSellQuote1 = mapper.readValue(sSellQuote, SSellQuote.class);*/
             int i = salesQuotationService.saveSalesQuotation(sSellQuote);
             if(i>0){
                 map.put("code",200);
@@ -123,6 +135,26 @@ public class SalesQuotationController {
         }catch (Exception e){
             map.put("code",500);
             map.put("msg","新增失败,服务器异常");
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
+     * 主从删除销售报价单
+     * @param quid
+     * @return
+     */
+    @RequestMapping("delSalesQuotation")
+    public Map<String,Object> delSalesQuotation(String quid){
+        Map<String,Object> map=new HashMap<String,Object>();
+        try {
+            salesQuotationService.delSalesQuotation(quid);
+            map.put("code",200);
+            map.put("msg","删除成功");
+        }catch (Exception e){
+            map.put("code",500);
+            map.put("msg","删除失败,服务器异常");
             e.printStackTrace();
         }
         return map;

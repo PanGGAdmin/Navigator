@@ -15,7 +15,7 @@
     .he{
         width:100px;
         height:100px;
-        border: 3px solid red;
+        border: 3px solid #ff0000;
         text-align: center;
         border-radius: 100%;
         font-size: 70px;
@@ -33,10 +33,10 @@
             <div class="layui-col-md6 layui-col-xs6">
                 <div class="layui-form-item">
                     <div class="layui-col-md4  layui-col-xs5">
-                        <input type="checkbox" id="tpcheckUser" title="正式客户" lay-filter="checkUser" checked>
+                        <input type="checkbox" id="tpcheckUser" title="正式客户" lay-filter="checkUser" checked="true" disabled>
                     </div>
                     <div class="layui-col-md8  layui-col-xs7">
-                        <select id="tpmodules" name="modules" lay-verify="required" lay-search="" lay-filter="modules">
+                        <select id="tpmodules" name="modules" lay-verify="required" lay-search="" lay-filter="modules"disabled>
                             <option value="">直接选择或搜索选择</option>
                         </select>
                     </div>
@@ -45,24 +45,23 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">送货地址</label>
                     <div class="layui-input-block">
-                        <div class="layui-col-md4 layui-col-xs4"><input type="text" id="tpaddressId" required lay-verify="required" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-col-md8  layui-col-xs8"><input type="text" id="tpaddressName" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-col-md4 layui-col-xs4"><input type="text" id="tpaddressId" required lay-verify="required" autocomplete="off" class="layui-input" disabled></div>
+                        <div class="layui-col-md8  layui-col-xs8"><input type="text" id="tpaddressName" required lay-verify="required" autocomplete="off" class="layui-input" disabled></div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">有效日期</label>
                     <div class="layui-input-block">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">单价是否含税</label>
                     <div class="layui-input-block">
-                        <select id="quPri cetax" lay-verify="required">
-                            <option value="0">未税</option>
-                            <option value="1">含税</option>
+                        <select id="quPricetax" lay-verify="required" disabled>
+
                         </select>
                     </div>
                 </div>
@@ -75,7 +74,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">单据日期</label>
                     <div class="layui-input-block">
-                        <input type="text" name="date1" id="date1" lay-verify="date1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        <input type="text" name="date1" id="date1" lay-verify="date1" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
 
@@ -89,14 +88,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">币别</label>
                     <div class="layui-input-block">
-                        <input type="text" id="quMoneytype" required lay-verify="required" autocomplete="off" class="layui-input" value="人民币">
+                        <input type="text" id="quMoneytype" required lay-verify="required" autocomplete="off" class="layui-input" value="人民币" disabled>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">汇率</label>
                     <div class="layui-input-block">
-                        <input type="text" id="quExchangerate" required lay-verify="required" autocomplete="off" class="layui-input" value="1.000">
+                        <input type="text" id="quExchangerate" required lay-verify="required" autocomplete="off" class="layui-input" value="1.000" disabled>
                     </div>
                 </div>
             </div>
@@ -106,47 +105,11 @@
             <div class="layui-tab layui-tab-card">
                 <ul class="layui-tab-title">
                     <li class="layui-this">内容</li>
-                    <li>备注</li>
                 </ul>
                 <div class="layui-tab-content" style="overflow:auto;">
                     <div class="layui-tab-item layui-show">
-                        <table class="layui-table" lay-filter="tpSalesPriceTable" lay-data="{width:2000,height:300}"id="tpSalesPriceTable">
+                        <table class="layui-table" lay-filter="tpSalesPriceTable" lay-data="{id: 'idTest',width:2000,height:300} "id="tpSalesPriceTable">
                         </table>
-                    </div>
-                    <div class="layui-tab-item">
-                        <div class="layui-row  layui-col-space20">
-                            <div class="layui-col-md6 layui-col-xs6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">表头条纹</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">自定义栏一</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-col-md6 layui-col-xs6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">表尾条纹</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">自定义栏二</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -157,14 +120,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">业务人员</label>
                     <div class="layui-input-block">
-                        <input type="text" id="quPeoywName" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" id="quPeoywName" required lay-verify="required" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">所属部门</label>
                     <div class="layui-input-block">
-                        <input type="text" id="quEmpName" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" id="quEmpName" required lay-verify="required" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
@@ -173,14 +136,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">制单人员</label>
                     <div class="layui-input-block">
-                        <input type="text" id="quPerzdName" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" id="quPerzdName" required lay-verify="required" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">复核人员</label>
                     <div class="layui-input-block">
-                        <input type="text" id="quPerckName" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" id="quPerckName" required lay-verify="required" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
@@ -209,38 +172,39 @@
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs6">
-                <div class="layui-btn-group">
-                    <button class="layui-btn layui-btn-sm">
-                        新增
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        修改
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        保存
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        删除
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        审核
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        取消审核
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        <i class="layui-icon">&#xe65a;</i>
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        <i class="layui-icon">&#xe603;</i>
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        <i class="layui-icon">&#xe602;</i>
-                    </button>
-                    <button class="layui-btn layui-btn-sm">
-                        <i class="layui-icon">&#xe65b;</i>
-                    </button>
-                </div>
+                <button class="layui-btn layui-btn layui-btn-sm layui-btn-disabled" id="xsbjxzyh" type="button">
+                    新增一行
+                </button>
+                 <button class="layui-btn layui-btn layui-btn-sm" id="xsbjxz" type="button">
+                     新增
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjxg"  type="button" >
+                     修改
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjbc"  type="button" >
+                     保存
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjsc"  type="button" >
+                     删除
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjsh"  type="button" >
+                     审核
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjqxsh"  type="button" >
+                     取消审核
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjsy"  type="button">
+                     <i class="layui-icon">&#xe65a;</i>
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjsyy"  type="button">
+                     <i class="layui-icon">&#xe603;</i>
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjxyy"  type="button">
+                     <i class="layui-icon">&#xe602;</i>
+                 </button>
+                 <button class="layui-btn layui-btn-sm" id="xsbjwy"  type="button">
+                     <i class="layui-icon">&#xe65b;</i>
+                 </button>
             </div>
         </div>
     </form>
@@ -256,84 +220,209 @@
         var table = layui.table;
         var form = layui.form,
             laydate = layui.laydate;
+    });
 
-        //单据日期监听
-        laydate.render({
-            elem: '#date1',
-            value:new Date(),
-            change: function(value, date, endDate){
-                $.ajax({
-                    url:"/queryMaxQuId",
-                    type:"GET",
-                    data:{"dateStr":value},
-                    dataType: "json",
-                    success: function(data){
-                        $("#tpQuId").val(data);
-                    },
-                    error:function (xhr) {
-                        layer.msg('服务器连接失败');
-                    }
-                });
-            },
-            done: function(value, date, endDate){
-                $.ajax({
-                    url:"/queryMaxQuId",
-                    type:"GET",
-                    data:{"dateStr":value},
-                    dataType: "json",
-                    success: function(data){
-                        $("#tpQuId").val(data);
-                    },
-                    error:function (xhr) {
-                        layer.msg('服务器连接失败');
-                    }
-                });
-            }
-        });
-
-        //日期
-        laydate.render({
-            elem: '#date',
-            value:new Date()
-        });
-
-        //监听单元格编辑
-        table.on('edit(test3)', function(obj) {
-            var value = obj.value //得到修改后的值
-                ,
-                data = obj.data //得到所在行所有键值
-                ,
-                field = obj.field; //得到字段
-            layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
-        });
-
-        form.render();
-        //加载页面查询正式客户
+    /**
+     * 获取数据
+     * @type {Array}
+     */
+    var tableData=new Array(); // 用于存放表格数据
+    var jsonPage=null;
+    function querySellQuote(currpage){
         $.ajax({
-            url:"/queryClientMasterfile",
-            type:"GET",
-            data:{},
-            dataType: "json",
-            success: function(data){
-                var option='<option value="">直接选择或搜索选择</option>';
-                jQuery("#modules").html("");
-                $.each(data.queryClientMasterfileData,function(i,obj){
-                     option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
+            url: "/querySellQuote"
+            ,data:{"pageSize":currpage}
+            ,type:"get"
+            ,async:false
+            ,dataType:"json"
+            , success: function(json){
+                jsonPage=json;
+                var result = json.querySellQuoteData;
+                $("#tpQuId").val(result.quId);
+                $("#tpaddressId").val(result.quCaddressId);
+                $("#tpaddressName").val(result.quCaddress);
+                $("#quMoneytype").val(result.quMoneytype);
+                $("#quExchangerate").val(result.quExchangerate);
+                $("#quPeoywName").val(result.quPeoywName);
+                $("#quEmpName").val(result.quEmpName);
+                $("#quPerzdName").val(result.quPerzdName);
+                $("#quPerckName").val(result.quPerckName);
+                $("#date1").val(result.quDate);
+                $("#date").val(result.quEffectdate);
+                if(result.quCheckstatus==1){
+                    $(".he").show();
+                    $("#xsbjsh").addClass("layui-btn-disabled");
+                    $("#xsbjqxsh").removeClass("layui-btn-disabled");
+                }else{
+                    $(".he").hide();
+                    $("#xsbjqxsh").addClass("layui-btn-disabled");
+                    $("#xsbjsh").removeClass("layui-btn-disabled");
+                }
+                console.info(result.quCtype)
+                if(result.quCtype==1){
+                    $("#tpcheckUser").attr("checked",true);
+                }else{
+                    $("#tpcheckUser").attr("checked",false);
+                }
 
-                })
-                $("#tpmodules").html(option);
-                form.render();
-            },
-            error:function (xhr) {
-                layer.msg('服务器连接失败');
+                if(result.quPricetax==1){
+                    $("#quPricetax").html("<option value='"+result.quPricetax+"'>含税</option>");//单价是否含税
+                }else{
+                    $("#quPricetax").html("<option value='"+result.quPricetax+"'>未税</option>");//单价是否含税
+                }
+                $("#tpmodules").html("<option value='"+result.quCid+"'>"+result.quCname+"</option>");//客户
+                tableData=result.sSellQuoteparticulars;
+                layui.use(['form', 'layedit', 'laydate', 'table'], function() {
+                    var table = layui.table;
+                    var form = layui.form,
+                        laydate = layui.laydate;
+                    /**
+                     * 为数据表格增加数据
+                     */
+                    table.render({
+                        elem: '#tpSalesPriceTable'
+                        ,data:tableData
+                        ,height: 315//容器高度
+                        ,cols: [[//表头
+                            {type:'checkbox',LAY_CHECKED:true}
+                            ,{title : '序号',type:'numbers',width: 100, title:'(栏号)', sort: true}
+                            ,{field:'qpMaterielid'    , title:'物料编号'  , width: 250  , sort: true}
+                            ,{field:'qpMaterielname' , title:'(物料名称)', width: 250 , sort: true}
+                            ,{field:'qpModel'  , title:'(规格型号)' , width: 250, sort: true,}
+                            ,{field:'qpUnitname' , title:'(单位名称)', width: 120, sort: true }
+                            ,{field:'qpNumber'    , title:'数量'   , width: 250, sort: true}
+                            ,{field:'qpDiscountprice'  , title:'折扣前单价' , width: 250, sort: true}
+                            ,{field:'qpDiscount'  , title:'折数(%)' , width: 250, sort: true}
+                            ,{field:'qpPrice'  , title:'单价' , width: 250, sort: true}
+                            ,{field:'qpSum'  , title:'金额' , width: 250, sort: true}
+                            ,{field:'qpRate'  , title:'税率(%)' , width: 250, sort: true}
+                            ,{field:'qpTatemoney'  , title:'(税额)' , width: 250, sort: true}
+                            ,{field:'qpTotalmoney'  , title:'(含税金额)' , width: 250, sort: true}
+                            ,{field:'qpLargess'  , title:'赠品' , width: 250, sort: true}
+                            ,{field:'qpRemark'  , title:'分录备注' , width: 250, sort: true}
+                        ]]
+                        ,page:false
+                    });
+                });
+
+
+
             }
         });
-        var datachecked=true;
-        //正式客户复选框监听
-        form.on('checkbox(checkUser)', function(data){
-            datachecked=data.elem.checked;
-            //勾选，查询正式客户
-            if(data.elem.checked){
+
+
+    }
+
+    $(function () {
+        querySellQuote(1);
+        $("#xsbjsy").click(function () {
+            querySellQuote(1);
+        })
+        $("#xsbjsyy").click(function () {
+            querySellQuote(jsonPage.perPage);
+        })
+        $("#xsbjxyy").click(function () {
+            querySellQuote(jsonPage.nextPage);
+        })
+        $("#xsbjwy").click(function () {
+            querySellQuote(jsonPage.maxPage);
+        })
+
+        $("#xsbjxz").click(function () {
+            $("#tpaddressId").val('');
+            $("#tpaddressName").val('');
+            $("#quMoneytype").val('人民币');
+            $("#quExchangerate").val('1.00');
+            $("#quPeoywName").val('Admin');
+            $("#quEmpName").val('销售部');
+            $("#quPerzdName").val('');
+            $("#quPerckName").val('');
+            $("#tpcheckUser").val('');
+            $("#quPricetax").val('');
+            $("#tpaddressId").attr("disabled",false);
+            $("#tpaddressName").attr("disabled",false);
+            $("#quMoneytype").attr("disabled",false);
+            $("#quExchangerate").attr("disabled",false);
+            $("#quPeoywName").attr("disabled",false);
+            $("#quEmpName").attr("disabled",false);
+            $("#quPerzdName").attr("disabled",false);
+            $("#quPerckName").attr("disabled",false);
+            $("#tpcheckUser").attr("disabled",false);
+            $("#quPricetax").attr("disabled",false);
+            $("#date").attr("disabled",false);
+            $("#date1").attr("disabled",false);
+            $("#tpmodules").attr("disabled",false);
+            $("#xsbjxzyh").removeClass("layui-btn-disabled");
+            $("#quPricetax").html("<option value='0'>未税</option><option value='1'>含税</option>");//单价是否含税
+            var endtime=new Date();
+            var dateYear = endtime.getFullYear();
+            var dateMonth=(endtime.getMonth()+1)<10?"0"+(endtime.getMonth()+1) :(endtime.getMonth()+1);
+            var dateDay=endtime.getDate()<10?"0"+endtime.getDate() :endtime.getDate();
+            var dateStr=dateYear+"-"+dateMonth+"-"+dateDay;
+            $.ajax({
+                url:"/queryMaxQuId",
+                type:"GET",
+                data:{"dateStr":dateStr},
+                dataType: "json",
+                success: function(data){
+                    console.info(data);
+                    $("#tpQuId").val(data);
+                },
+                error:function (xhr) {
+                    layer.msg('服务器连接失败');
+                }
+            });
+            layui.use(['form', 'layedit', 'laydate', 'table'], function() {
+                var table = layui.table;
+                var form = layui.form,
+                    laydate = layui.laydate;
+
+                var oldData = new Array();
+                var data1 = {
+                    "qpMaterielid": "",
+                    "qpMaterielname": "",
+                    "qpModel": "",
+                    "qpUnitname": "",
+                    "dbId": "",
+                    "qpNumber": "0",
+                    "qpDiscountprice": "0",
+                    "qpDiscount": "100",
+                    "qpPrice": 0,
+                    "qpSum": "0",
+                    "qpRate": "100",
+                    "qpTatemoney": "0",
+                    "qpTotalmoney": "0",
+                    "qpLargess": "否",
+                    "qpRemark": ""
+                };
+                oldData.push(data1);
+                table.render({
+                    data: oldData,
+                    elem: '#tpSalesPriceTable'
+                    , height: 315//容器高度
+                    , cols: [[//表头
+                        {type: 'checkbox', LAY_CHECKED: true}
+                        , {title: '序号', type: 'numbers', width: 100, title: '(栏号)', sort: true}
+                        , {field: 'qpMaterielid', title: '物料编号', width: 250, sort: true}
+                        , {field: 'qpMaterielname', title: '(物料名称)', width: 250, sort: true}
+                        , {field: 'qpModel', title: '(规格型号)', width: 250, sort: true,}
+                        , {field: 'qpUnitname', title: '(单位名称)', width: 120, sort: true}
+                        , {field: 'qpNumber', title: '数量', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpDiscountprice', title: '折扣前单价', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpDiscount', title: '折数(%)', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpPrice', title: '单价', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpSum', title: '金额', width: 250, sort: true}
+                        , {field: 'qpRate', title: '税率(%)', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpTatemoney', title: '(税额)', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpTotalmoney', title: '(含税金额)', width: 250, sort: true}
+                        , {field: 'qpLargess', title: '赠品', width: 250,edit:'text'}
+                        , {field: 'qpRemark', title: '分录备注', width: 250, sort: true}
+                    ]]
+                    , page: false
+                });
+
+
+                //加载页面查询正式客户
                 $.ajax({
                     url:"/queryClientMasterfile",
                     type:"GET",
@@ -343,170 +432,266 @@
                         var option='<option value="">直接选择或搜索选择</option>';
                         jQuery("#modules").html("");
                         $.each(data.queryClientMasterfileData,function(i,obj){
-                            option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
+                             option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
 
                         })
                         $("#tpmodules").html(option);
                         form.render();
-                        $("#tpaddressId").val('');
-                        $("#tpaddressName").val('');
                     },
                     error:function (xhr) {
                         layer.msg('服务器连接失败');
                     }
                 });
-            }else {
-                //不勾选，查询潜在客户
+                var datachecked=true;
+                //正式客户复选框监听
+                form.on('checkbox(checkUser)', function(data){
+                    datachecked=data.elem.checked;
+                    //勾选，查询正式客户
+                    if(data.elem.checked){
+                        $.ajax({
+                            url:"/queryClientMasterfile",
+                            type:"GET",
+                            data:{},
+                            dataType: "json",
+                            success: function(data){
+                                var option='<option value="">直接选择或搜索选择</option>';
+                                jQuery("#modules").html("");
+                                $.each(data.queryClientMasterfileData,function(i,obj){
+                                    option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
+
+                                })
+                                $("#tpmodules").html(option);
+                                form.render();
+                                $("#tpaddressId").val('');
+                                $("#tpaddressName").val('');
+                            },
+                            error:function (xhr) {
+                                layer.msg('服务器连接失败');
+                            }
+                        });
+                    }else {
+                        //不勾选，查询潜在客户
+                        $.ajax({
+                            url:"/queryPotentialClientFile",
+                            type:"GET",
+                            data:{},
+                            dataType: "json",
+                            success: function(data){
+                                var option='<option value="">直接选择或搜索选择</option>';
+                                jQuery("#modules").html("");
+                                $.each(data.queryPotentialClientFileData,function(i,obj){
+                                    option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
+
+                                })
+                                $("#tpmodules").html(option);
+                                form.render();
+                                $("#tpaddressId").val('');
+                                $("#tpaddressName").val('');
+                            },
+                            error:function (xhr) {
+                                layer.msg('服务器连接失败');
+                            }
+                        });
+                    }
+
+            });
+
+               //单据日期监听
+                laydate.render({
+                    elem: '#date1',
+                    value:new Date(),
+                    change: function(value, date, endDate){
+                            $.ajax({
+                                url:"/queryMaxQuId",
+                                type:"GET",
+                                data:{"dateStr":value},
+                                dataType: "json",
+                                success: function(data){
+                                    $("#tpQuId").val(data);
+                                },
+                                error:function (xhr) {
+                                    layer.msg('服务器连接失败');
+                                }
+                            });
+                        },
+                        done: function(value, date, endDate){
+                            $.ajax({
+                                url:"/queryMaxQuId",
+                                type:"GET",
+                                data:{"dateStr":value},
+                                dataType: "json",
+                                success: function(data){
+                                    $("#tpQuId").val(data);
+                                },
+                                error:function (xhr) {
+                                    layer.msg('服务器连接失败');
+                                }
+                            });
+                        }
+
+                });
+
+                //日期
+                laydate.render({
+                    elem: '#date',
+                    value:new Date()
+                });
+
+    //客户下拉框监听事件
+    form.on('select(modules)', function(data){
+        if(data.value!="") {
+            if(datachecked){
                 $.ajax({
-                    url:"/queryPotentialClientFile",
+                    url:"/queryClientMasterfileAddress",
                     type:"GET",
-                    data:{},
+                    data:{addressid:data.value},
                     dataType: "json",
                     success: function(data){
-                        var option='<option value="">直接选择或搜索选择</option>';
-                        jQuery("#modules").html("");
-                        $.each(data.queryPotentialClientFileData,function(i,obj){
-                            option+='<option value="'+obj.id+'">'+obj.shortName+'</option>';
-
-                        })
-                        $("#tpmodules").html(option);
-                        form.render();
-                        $("#tpaddressId").val('');
-                        $("#tpaddressName").val('');
+                        console.info(data);
+                        $("#tpaddressId").val(data.queryClientMasterfileAddressData[0].addrID);
+                        $("#tpaddressName").val(data.queryClientMasterfileAddressData[0].address);
+                    },
+                    error:function (xhr) {
+                        layer.msg('服务器连接失败');
+                    }
+                });
+            }else{
+                $.ajax({
+                    url:"/queryPotentialClientFileAddress",
+                    type:"GET",
+                    data:{addressid:data.value},
+                    dataType: "json",
+                    success: function(data){
+                        console.info(data);
+                        $("#tpaddressId").val(data.queryPotentialClientFileAddressData[0].addrid);
+                        $("#tpaddressName").val(data.queryPotentialClientFileAddressData[0].address);
                     },
                     error:function (xhr) {
                         layer.msg('服务器连接失败');
                     }
                 });
             }
-
-        });
-
-        //客户下拉框监听事件
-        form.on('select(modules)', function(data){
-            if(data.value!="") {
-                if(datachecked){
-                    $.ajax({
-                        url:"/queryClientMasterfileAddress",
-                        type:"GET",
-                        data:{addressid:data.value},
-                        dataType: "json",
-                        success: function(data){
-                            console.info(data);
-                            $("#tpaddressId").val(data.queryClientMasterfileAddressData[0].addrID);
-                            $("#tpaddressName").val(data.queryClientMasterfileAddressData[0].address);
-                        },
-                        error:function (xhr) {
-                            layer.msg('服务器连接失败');
-                        }
-                    });
-                }else{
-                    $.ajax({
-                        url:"/queryPotentialClientFileAddress",
-                        type:"GET",
-                        data:{addressid:data.value},
-                        dataType: "json",
-                        success: function(data){
-                            console.info(data);
-                            $("#tpaddressId").val(data.queryPotentialClientFileAddressData[0].addrid);
-                            $("#tpaddressName").val(data.queryPotentialClientFileAddressData[0].address);
-                        },
-                        error:function (xhr) {
-                            layer.msg('服务器连接失败');
-                        }
-                    });
-                }
-            }else{
-                $("#tpaddressId").val('');
-                $("#tpaddressName").val('');
-            }
-        });
-
-        /**
-         * 获取数据
-         * @type {Array}
-         */
-        var tableData=new Array(); // 用于存放表格数据
-        $.ajax({
-            url: "/querySellQuote"
-            ,data:{"pageSize":1}
-            ,type:"get"
-            ,async:false
-            ,dataType:"json"
-            , success: function(result){
-
-                tableData=result.sSellQuoteparticulars;
-                console.log(result);
-            }
-        });
-
-        /**
-         * 为数据表格增加数据
-         */
-        table.render({
-            elem: '#tpSalesPriceTable'
-            ,data:tableData
-            ,height: 315//容器高度
-            ,cols: [[//表头
-                {type:'checkbox',LAY_CHECKED:true}
-                ,{title : '序号',type:'numbers',width: 50, title:'(栏号)'}
-                ,{field:'qpMaterielid'    , title:'物料编号'  , width: 250  , sort: true}
-                ,{field:'qpMaterielname' , title:'(物料名称)', width: 250 }
-                ,{field:'qpModel'  , title:'(规格型号)' , width: 250, sort: true, edit: 'text'}
-                ,{field:'qpUnitname' , title:'(单位名称)', width: 120, sort: true }
-                ,{field:'qpNumber'    , title:'数量'   , width: 250,  edit: 'text'}
-                ,{field:'qpDiscountprice'  , title:'折扣前单价' , width: 250}
-                ,{field:'qpDiscount'  , title:'折数(%)' , width: 250}
-                ,{field:'qpPrice'  , title:'单价' , width: 250}
-                ,{field:'qpSum'  , title:'金额' , width: 250}
-                ,{field:'qpRate'  , title:'税率(%)' , width: 250}
-                ,{field:'qpTatemoney'  , title:'(税额)' , width: 250}
-                ,{field:'qpTotalmoney'  , title:'(含税金额)' , width: 250}
-                ,{field:'qpLargess'  , title:'赠品' , width: 250}
-                ,{field:'qpRemark'  , title:'分录备注' , width: 250}
-            ]]
-            ,page: {
-                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                ,curr: 1 //设定初始在第 1 页
-                ,groups: 1 //只显示 1 个连续页码
-                ,first: true //不显示首页
-                ,last: true //不显示尾页
-            }
-            , done: function(res, curr, count){
-            }
-
-        });
+        }else{
+            $("#tpaddressId").val('');
+            $("#tpaddressName").val('');
+        }
     });
+        })
+    })
+
+
+})
+
+
     $(function(){
-        var endtime=new Date();
-        var dateYear = endtime.getFullYear();
-        var dateMonth=(endtime.getMonth()+1)<10?"0"+(endtime.getMonth()+1) :(endtime.getMonth()+1);
-        var dateDay=endtime.getDate()<10?"0"+endtime.getDate() :endtime.getDate();
-        var dateStr=dateYear+"-"+dateMonth+"-"+dateDay;
-        $.ajax({
-            url:"/queryMaxQuId",
-            type:"GET",
-            data:{"dateStr":dateStr},
-            dataType: "json",
-            success: function(data){
-                console.info(data);
-                $("#tpQuId").val(data);
-            },
-            error:function (xhr) {
-                layer.msg('服务器连接失败');
+
+
+        //点击加号按钮时，新添一行
+        $("#xsbjxzyh").click(function() {
+            layui.use(['form', 'layedit', 'laydate', 'table'], function () {
+                var table = layui.table;
+                var form = layui.form,
+                    laydate = layui.laydate;
+                var oldData = new Array();
+                var checkStatuss = table.checkStatus('tpSalesPriceTable');
+                $.each(checkStatuss.data,function(n,value) {
+                    oldData.push(value);
+                })
+
+                var data1 = {
+                    "qpMaterielid": "1",
+                    "qpMaterielname": 0,
+                    "qpModel": "1",
+                    "qpUnitname": "1",
+                    "dbId": 1,
+                    "qpNumber": "1",
+                    "qpDiscountprice": "1",
+                    "qpDiscount": 0,
+                    "qpPrice": 0,
+                    "qpSum": "1",
+                    "qpRate": "1",
+                    "qpTatemoney": "1",
+                    "qpTotalmoney": "1",
+                    "qpLargess": "1",
+                    "qpRemark": "1"
+                };
+                oldData.push(data1);
+                table.render({
+                    data: oldData,
+                    elem: '#tpSalesPriceTable'
+                    , height: 315//容器高度
+                    , cols: [[//表头
+                        {type: 'checkbox', LAY_CHECKED: true}
+                        , {title: '序号', type: 'numbers', width: 100, title: '(栏号)', sort: true}
+                        , {field: 'qpMaterielid', title: '物料编号', width: 250, sort: true}
+                        , {field: 'qpMaterielname', title: '(物料名称)', width: 250, sort: true}
+                        , {field: 'qpModel', title: '(规格型号)', width: 250, sort: true,}
+                        , {field: 'qpUnitname', title: '(单位名称)', width: 120, sort: true}
+                        , {field: 'qpNumber', title: '数量', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpDiscountprice', title: '折扣前单价', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpDiscount', title: '折数(%)', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpPrice', title: '单价', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpSum', title: '金额', width: 250, sort: true}
+                        , {field: 'qpRate', title: '税率(%)', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpTatemoney', title: '(税额)', width: 250, sort: true,edit:'text'}
+                        , {field: 'qpTotalmoney', title: '(含税金额)', width: 250, sort: true}
+                        , {field: 'qpLargess', title: '赠品', width: 250,edit:'text'}
+                        , {field: 'qpRemark', title: '分录备注', width: 250, sort: true}
+                    ]]
+                    , page: false
+                });
+            })
+        })
+
+        $("#xsbjbc").click(function () {
+            var checkStatus=null;
+            layui.use(['form', 'layedit', 'laydate', 'table'], function () {
+                var table = layui.table;
+                var form = layui.form,
+                    laydate = layui.laydate;
+                var checkStatuss = table.checkStatus('tpSalesPriceTable');
+                $.each(checkStatuss.data,function(n,value) {
+                    checkStatus=value;
+                })
+            })
+            var checkUser = 0;
+            if(!$("#tpcheckUser").val()){
+                checkUser=1;
             }
+            var savedata={};
+            savedata["quCid"]=$("#tpmodules").val();                //客户id
+            savedata["quCaddressId"]=$("#tpaddressId").val();            //地址id
+            savedata["quCaddress"]=$("#tpaddressName").val();    //地址
+            savedata["quMoneytype"]=$("#quMoneytype").val();    //币别
+            savedata["quExchangerate"]=$("#quExchangerate").val();    //汇率
+            savedata["quPeoywName"]=$("#quPeoywName").val();        //业务
+            savedata["quEmpName"]=$("#quEmpName").val();        //部门
+            savedata["quPerzdName"]=$("#quPerzdName").val();    //制单
+            savedata["quPerckName"]=$("#quPerckName").val();        //审核人员
+            savedata["quPricetax"]=$("#quPricetax").val();    //是否含税
+            savedata["quDate"]=$("#date1").val();    //单据日期
+            savedata["quEffectdate"]=$("#date").val();    //有效日期
+            savedata["quId"]=$("#tpQuId").val(); //单据号码
+            savedata["quCtype"]=checkUser;          //客户类型
+            savedata["quCheckstatus"]=0;          //是否审核
+            savedata["sSellQuoteparticulars"]=null;//checkStatus;//从表
+
+            console.info(savedata)
+            $.ajax("/saveSalesQuotation",{
+                "type":"POST",
+                "dataType":"json",
+                "timeout":4000,
+                "data":JSON.stringify(savedata),
+                "contentType":"application/json",
+                "success":function(json){
+                    layer.msg(json.msg);
+                },
+                "error":function(xhr,ms,e){
+                    layer.msg(json.msg);
+                }
+            });
         });
 
-       /* //点击加号按钮时，新添一行
-        $("#tpSalesPriceTable").click(function(){
-            alert(11)
-            var oldData =  table.cache["baseInfo"];
-            var data1={"colName":"ID2","colNo":0,"collator":"","comments":"","dbId":1,"defVal":"","deleted":"","dispersion":0,"domainId":0,"histogram":"","isHide":"","isSerial":"F","isVirtual":"","maxVal":"","minVal":"","notNull":"T","repetRate":0,"scale":-1,"serialId":0,"tableId":1048586,"timestampT":" ","typeName":"INTEGER","varying":"F","vcolNo":0,"vertNo":0};
-            oldData.push(data1);
-            table.reload('baseInfo',{
-                data : oldData
-            });
-        });*/
     })
 </script>
 
